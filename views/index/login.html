@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <link rel="stylesheet" href="/public/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/public/assets/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="/public/assets/nprogress/nprogress.css">
+    <link rel="stylesheet" href="/public/less/index.css">
+</head>
+<body>
+    <!-- 登录 -->
+    <div class="login">
+        <div class="login-wrap">
+            <div class="avatar">
+                <img src="./uploads/monkey.png" class="img-circle" alt="">
+            </div>
+            <form action="" id="loginForm" class="col-xs-offset-1 col-xs-10">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input type="text" name="tc_name" class="form-control" placeholder="用户名">
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                    </span>
+                    <input type="password" name="tc_pass" class="form-control" placeholder="密码">
+                </div>
+                <button id="btn" type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="./assets/jquery/jquery.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    
+    <script>
+        //登录验证
+        $('#btn').click(function(){
+            $.ajax({
+                type:"post",
+                // /api代表http://api.studyit.com /api反向代理
+                url:"/api/login",
+                //用表单序列化必须添加name属性
+                data:$('#loginForm').serialize(),
+                dataType:"json",
+                success:function(data){
+                    if(data.code==200){
+                        //应该把data中的用户信息保存到cookie中即可实现页面数据共享
+                        // /表示根目录 location.href 只能使用get请求，没法使用post请求
+                        location.href="/index.html";
+                    }
+                }
+            });
+            return false;
+
+        });
+
+    </script>
+    <!--<script>
+        $("#btn").click(function(){
+            console.log(111);
+            $.ajax({
+                type:"post",
+                url:"/api/login",
+                dataType:"json",
+                data:$("#loginForm").serialize(),
+                success:function(data){
+                    //判断是否正确
+                    if(data.code==200){
+                        console.log(data);
+                        location.href="/index.html";
+                    }
+                }
+            });
+            return false;
+
+        });
+    </script>-->
+</body>
+</html>
