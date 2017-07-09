@@ -1,11 +1,11 @@
 <?php
 //后端路由（分发url请求）
-$pathname='index';
-$filename='index';
+$pathname='index';//views下面文件夹的名称
+$filename='index';//文件夹下面文件名称（不包括文件后缀）
 if(isset($_SERVER['PATH_INFO'])){
-    //包含路径
+    //包含路径/teachet/list
     $urlpath=$_SERVER['PATH_INFO'];
-    //去掉字符串中的第一个字符
+    //去掉字符串中的第一个字符 teacher/list
     $str=substr($urlpath,'1');
     //分割字符串（和js中的split相似）
     $arr=explode('/',$str);

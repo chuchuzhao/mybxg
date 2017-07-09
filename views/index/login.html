@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
-    <link rel="stylesheet" href="/public/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/assets/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/public/assets/nprogress/nprogress.css">
-    <link rel="stylesheet" href="/public/less/index.css">
+    <?php include('/views/common/style.html');?>
 </head>
 <body>
     <!-- 登录 -->
@@ -33,10 +30,12 @@
         </div>
     </div>
     
-    <script src="./assets/jquery/jquery.min.js"></script>
-    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+   <?php include('/views/common/script.html');?>
+   <script>
+       require(['login']);
+   </script>
     
-    <script>
+    <!--<script>
         //登录验证
         $('#btn').click(function(){
             $.ajax({
@@ -50,7 +49,7 @@
                     if(data.code==200){
                         //应该把data中的用户信息保存到cookie中即可实现页面数据共享
                         // /表示根目录 location.href 只能使用get请求，没法使用post请求
-                        location.href="/index.html";
+                        location.href="/index/index";
                     }
                 }
             });
@@ -58,26 +57,6 @@
 
         });
 
-    </script>
-    <!--<script>
-        $("#btn").click(function(){
-            console.log(111);
-            $.ajax({
-                type:"post",
-                url:"/api/login",
-                dataType:"json",
-                data:$("#loginForm").serialize(),
-                success:function(data){
-                    //判断是否正确
-                    if(data.code==200){
-                        console.log(data);
-                        location.href="/index.html";
-                    }
-                }
-            });
-            return false;
-
-        });
     </script>-->
 </body>
 </html>
