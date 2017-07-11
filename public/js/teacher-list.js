@@ -1,7 +1,8 @@
-define(['jquery', 'template', 'bootstrap'], function ($, template) {
+define(['jquery', 'template','util', 'bootstrap'], function ($, template,util) {
     /*
     讲师管理
     */
+    util.setMenu(location.pathname);
     //调用接口，获取数据，渲染界面
     $.ajax({
         type: 'get',
