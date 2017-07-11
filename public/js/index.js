@@ -1,3 +1,3 @@
 define(['utils'],function(utils){
-    utils.setMenu('/');
+    utils.setMenu(location.pathname);
 });
