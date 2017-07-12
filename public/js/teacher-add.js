@@ -1,4 +1,4 @@
-define(['jquery', 'template', 'util','datepicker','language'], function ($, template, util) {
+define(['jquery', 'template', 'util', 'datepicker', 'language', 'validate','form'], function ($, template, util) {
     /*
       添加或者编辑讲师
     */
@@ -21,22 +21,23 @@ define(['jquery', 'template', 'util','datepicker','language'], function ($, temp
                 data.result.tc_operate = '编辑讲师';
                 var html = template('teacherTpl', data.result);
                 $('#teacherInfo').html(html);
-                $('#addBtn').click(function () {
-                    // console.log($('#addForm').serialize());
-                    $.ajax({
-                        type: 'post',
-                        url: '/api/teacher/update',
-                        data: $('#addForm').serialize(),
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.code == 200) {
-                                location.href = '/teacher/list';
-                            }
-                        }
-                    });
-                });
+                // $('#addBtn').click(function () {
+                // console.log($('#addForm').serialize());
+                // $.ajax({
+                //     type: 'post',
+                //     url: '/api/teacher/update',
+                //     data: $('#addForm').serialize(),
+                //     dataType: 'json',
+                //     success: function (data) {
+                //         if (data.code == 200) {
+                //             location.href = '/teacher/list';
+                //         }
+                //     }
+                // });
+                //  });
+                submitForm('/api/teacher/update');
             }
-        })
+        });
     } else {
         //添加讲师
         var html = template('teacherTpl', {
@@ -44,21 +45,47 @@ define(['jquery', 'template', 'util','datepicker','language'], function ($, temp
             tc_gender: 0
         });
         $('#teacherInfo').html(html);
+
+        submitForm('/api/teacher/add');
+
     }
 
-    // 绑定表单提交事件
-    $('#addBtn').click(function () {
-        $.ajax({
-            type: 'post',
-            url: '/api/teacher/add',
-            data: $('#addForm').serialize(),
-            dataType: 'json',
-            success: function (data) {
-                if (data.code == 200) {
-                    location.href = '/teacher/list';
+    // 实现表单提交
+    function submitForm(url) {
+        $('#addForm').validate({
+            sendFrom: false,
+            valid: function () {
+                $('#addForm').ajaxSubmit({
+                    type: 'post',
+                    url: url,
+                    dataType: 'json',
+                    // data : $('#addForm').serialize(),
+                    success: function (data) {
+                        //console.log(data);
+                        if (data.code == 200) {
+                            location.href = '/teacher/list';
+                        }
+                    }
+                });
+            },
+            description:{
+                tc_name:{
+                    required:'用户名不能为空'
+                },
+                tc_pass:{
+                    required:'密码不能为空',
+                    pattern:'密码只能是6位数字'
+                },
+                tc_join_date:{
+                    required:'入职日期必须选择'
                 }
             }
+
         });
-    });
+    };
+
+
+    
+
 
 });

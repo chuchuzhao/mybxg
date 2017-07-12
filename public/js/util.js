@@ -1,17 +1,28 @@
 define(['jquery'],function($){
-    return{
-        setMenu:function(pathname){
-            $('.aside .navs a[href="'+pathname+'"]').addClass('active');
-        },
-        qs:function(key){
-            var search=location.search.slice(1);
-            search=search.split('&');
-            var obj={};
-            for(var i=0;i<search.length;i++){
-                var temp=search[i].split('=');
-                obj[temp[0]]=temp[1];
-            }
-            return obj[key];
-        }
+  /*
+    工具方法
+  */
+  // 获取URL中指定的参数值
+  function qs(key,param){
+    var obj = {};
+    if(param){
+      var p = param.substr(1);
+      if(p){
+        var arr = p.split('&');
+        arr.forEach(function(item){
+          var kv = item.split('=');
+          obj[kv[0]] = kv[1];
+        });
+      }
     }
+    return obj[key];
+  }
+  // 设置导航菜单选中
+  function setMenu(pathname){
+    $('.aside .navs a[href="'+pathname+'"]').addClass('active');
+  }
+  return {
+    qs : qs,
+    setMenu : setMenu
+  }
 });

@@ -1,3 +1,3 @@
-define(['utils'],function(utils){
-    utils.setMenu(location.pathname);
+define(['util'],function(util){
+    util.setMenu(location.pathname);
 });
