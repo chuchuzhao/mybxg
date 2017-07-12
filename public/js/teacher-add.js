@@ -51,41 +51,71 @@ define(['jquery', 'template', 'util', 'datepicker', 'language', 'validate','form
     }
 
     // 实现表单提交
-    function submitForm(url) {
-        $('#addForm').validate({
-            sendFrom: false,
-            valid: function () {
-                $('#addForm').ajaxSubmit({
-                    type: 'post',
-                    url: url,
-                    dataType: 'json',
-                    // data : $('#addForm').serialize(),
-                    success: function (data) {
-                        //console.log(data);
-                        if (data.code == 200) {
-                            location.href = '/teacher/list';
-                        }
-                    }
-                });
-            },
-            description:{
-                tc_name:{
-                    required:'用户名不能为空'
-                },
-                tc_pass:{
-                    required:'密码不能为空',
-                    pattern:'密码只能是6位数字'
-                },
-                tc_join_date:{
-                    required:'入职日期必须选择'
-                }
+    // function submitForm(url) {
+    //     $('#addForm').validate({
+    //         sendFrom: false,
+    //         valid: function () {
+    //             $('#addForm').ajaxSubmit({
+    //                 type: 'post',
+    //                 url: url,
+    //                 dataType: 'json',
+    //                 // data : $('#addForm').serialize(),
+    //                 success: function (data) {
+    //                     //console.log(data);
+    //                     if (data.code == 200) {
+    //                         location.href = '/teacher/list';
+    //                     }
+    //                 }
+    //             });
+    //         },
+    //         description:{
+    //             tc_name:{
+    //                 required:'用户名不能为空'
+    //             },
+    //             tc_pass:{
+    //                 required:'密码不能为空',
+    //                 pattern:'密码只能是6位数字'
+    //             },
+    //             tc_join_date:{
+    //                 required:'入职日期必须选择'
+    //             }
+    //         }
+
+    //     });
+    // };
+
+
+    function submitForm(url){
+    $('#addForm').validate({
+      sendForm : false,
+      valid : function(){
+        // 提交表单
+        // submitForm('/api/teacher/add');
+        $('#addForm').ajaxSubmit({
+          type : 'post',
+          url : url,
+          dataType : 'json',
+          success : function(data){
+            if(data.code == 200){
+              location.href = '/teacher/list';
             }
-
+          }
         });
-    };
-
-
-    
+      },
+      description : {
+        tc_name : {
+          required : '用户名不能为空'
+        },
+        tc_pass : {
+          required : '密码不能为空',
+          pattern : '密码只能是6位数字'
+        },
+        tc_join_date : {
+          required : '入职日期必须选择'
+        }
+      }
+    });
+  }
 
 
 });
