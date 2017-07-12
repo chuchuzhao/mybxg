@@ -17,7 +17,8 @@ require.config({
         index: '../js/index',
         settings: '../js/settings',
         uploadify: 'uploads/jquery.uploadify',
-        region:'jquery-region/jquery.region'
+        region:'jquery-region/jquery.region',
+        editor:'ckeditor/ckeditor'
     },
     shim: {
         bootstrap: {
@@ -31,6 +32,9 @@ require.config({
         },
         uploadify: {
             deps: ['jquery']
+        },
+        editor:{
+            exports:'CKEDITOR'
         }
     }
 });

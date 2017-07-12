@@ -1,4 +1,4 @@
-define(['jquery', 'template', 'util', 'uploadify','region'], function ($, template, util) {
+define(['jquery', 'template', 'util', 'editor', 'uploadify', 'region'], function ($, template, util, CKEDITOR) {
     util.setMenu('/index/index');
     $.ajax({
         type: 'get',
@@ -23,7 +23,27 @@ define(['jquery', 'template', 'util', 'uploadify','region'], function ($, templa
             });
             //处理省市区三级联动
             $('#region').region({
-                url:'/public/assets/jquery-region/region.json'
+                url: '/public/assets/jquery-region/region.json'
+            });
+            //处理富文本
+            CKEDITOR.replace('editor', {
+                toolbarGroups: [{
+                        name: 'clipboard',
+                        groups: ['clipboard', 'undo']
+                    },
+                    {
+                        name: 'editing',
+                        groups: ['find', 'selection', 'spellchecker', 'editing']
+                    },
+                    {
+                        name: 'others',
+                        groups: ['others']
+                    },
+                    {
+                        name: 'about',
+                        groups: ['about']
+                    }
+                ]
             });
         }
     });
