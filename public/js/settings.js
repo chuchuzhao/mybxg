@@ -16,9 +16,10 @@ define(['jquery', 'template', 'util', 'editor', 'uploadify', 'region', 'datepick
                 swf: '/public/assets/uploads/uploadify.swf',
                 uploader: '/api/uploader/avatar',
                 onUploadSuccess: function (a, b, c) {
+                    var obj=JSON.parse(b);
                     //修改图片地址
-                    console.log(b);
-                    $('#settingsInfo img').attr('src', b.result.path);
+                    // console.log(b);
+                    $('#settingsInfo img').attr('src', obj.result.path);
                 }
             });
             //处理省市区三级联动
