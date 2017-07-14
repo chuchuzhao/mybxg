@@ -19,6 +19,7 @@ require.config({
         course_list:'../js/course-list',
         course_add:'../js/course-add',
         course_basic:'../js/course-basic',
+        course_pic:'../js/course-pic',
         uploadify: 'uploads/jquery.uploadify',
         region:'jquery-region/jquery.region',
         editor:'ckeditor/ckeditor'
